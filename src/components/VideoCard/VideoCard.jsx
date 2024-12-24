@@ -29,8 +29,6 @@ const VideoCard = () => {
             alt="Creator"
           />
         </div>
-
-        {/* Video Details */}
         <div className={cn("ml-4 flex flex-col justify-between w-full")}>
           <h2 className={cn("text-lg font-semibold")}>
             JavaScript Fundamentals: Variables and Data Types
