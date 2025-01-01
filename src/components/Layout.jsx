@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import ChannelPage from "../pages/ChannelPage";
+import AllRoutes from "../pages/AllRoutes";
 
 const Layout = ({ children }) => {
   return (
@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
       <main className="flex-1 bg-gray-50">
         {/* <div className="ml-60 pl-4">{children}</div> */}
         <div className="ml-64">
-          <ChannelPage />
+          <AllRoutes />
         </div>
       </main>
 
