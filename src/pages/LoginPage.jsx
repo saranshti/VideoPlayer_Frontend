@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const Server_Api_Url = import.meta.env.VITE_APP_SERVER_API;
-  const { setIsAuthenticated, setToken, setAgentId } = useContext(AuthContext);
+  const { setIsAuthenticated, setToken, setUserDetails } =
+    useContext(AuthContext);
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,9 +23,6 @@ const LoginPage = () => {
     if (!userId || !password) {
       return;
     }
-
-    console.log("loginf");
-    toast("🦄 Wow so easy!");
     setLoading(true);
     try {
       const response = await axios.post(
@@ -35,39 +33,37 @@ const LoginPage = () => {
         },
         {
           headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         }
       );
 
       if (response.status === 200 || response.status === 201) {
-        // const myToken = response?.data?.data?.token;
-        // setToken(myToken);
-        // const encryptedToken = encryptId(myToken);
-        // sessionStorage?.setItem("token", encryptedToken);
-        // setIsAuthenticated(true);
-        // const userData = response?.data?.data;
-        // const encryptedAgentId = encryptId(userData?.agentId);
-        // sessionStorage?.setItem("agentId", encryptedAgentId);
-        // setAgentId(response?.data?.data?.agentId);
-        // navigation("/");
+        const accessToken = response?.data?.data?.accessToken;
+        const refreshToken = response?.data?.data?.refreshToken;
+        setToken({
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+        });
+        sessionStorage?.setItem(
+          "token",
+          JSON.stringify({
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+          })
+        );
+        setIsAuthenticated(true);
+        const userData = response?.data?.data?.user;
+        sessionStorage?.setItem("userData", JSON.stringify(userData));
+        setUserDetails(userData);
         toast.success(response.data.message);
-        console.log("res", response.data.message);
+        navigation("/");
       } else {
         setIsAuthenticated(false);
-        console.log("failed");
-        // addNotification(
-        //   "error",
-        //   response?.data?.message || response?.data?.errorMessage
-        // );
+        toast.error(response.data.message);
       }
     } catch (error) {
       setIsAuthenticated(false);
-      console.log("first", error);
-      //   addNotification(
-      //     "error",
-      //     error?.response?.data?.message ||
-      //       error?.response?.data?.errorMessage ||
-      //       `Login Failed.`
-      //   );
+      toast.error(error);
     } finally {
       setLoading(false);
     }

@@ -9,7 +9,7 @@ const AllRoutes = () => {
   return (
     <div className="w-full">
       <Routes>
-        {/* <Route path="/" element={<Homepage />} /> */}
+        <Route path="/" element={<VideoListingGrid />} />
         <Route path="/channelPage" element={<ChannelPage />} />
         <Route path="/videoDetailPage" element={<VideoDetailPage />} />
         <Route path="/videoListingGrid" element={<VideoListingGrid />} />

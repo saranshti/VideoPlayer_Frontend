@@ -1,15 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Hamburger from "../assets/svg/Hamburger";
 import Logo from "../assets/svg/Logo";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../store/AuthContextProvider";
+import { toast } from "react-toastify";
+import axios from "axios";
 import "../css/Header.css";
 import SideBar from "./SideBar";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigation = useNavigate();
 
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
   const toggleSidebar = () => setSidebarOpen((prevState) => !prevState);
+
+  const Server_Api_Url = import.meta.env.VITE_APP_SERVER_API;
+  const { setIsAuthenticated } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+
+  const handleSignout = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${Server_Api_Url}/users/logout`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        setIsAuthenticated(false);
+        sessionStorage.clear();
+        navigation("/");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error?.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -72,6 +110,31 @@ const Header = () => {
                           neil.sims@flowbite.com
                         </p>
                       </div>
+                      <ul className="py-1">
+                        <li>
+                          <a href="#" className="drpdown-menu">
+                            Dashboard
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" className="drpdown-menu">
+                            Settings
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" className="drpdown-menu">
+                            Earnings
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            onClick={(e) => handleSignout(e)}
+                            className="drpdown-menu"
+                          >
+                            Sign out
+                          </a>
+                        </li>
+                      </ul>
                     </div>
                   )}
                 </div>
