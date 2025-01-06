@@ -57,7 +57,7 @@ const SignupPage = () => {
         toast.success("Signup successful! Please log in.");
         // router.push("/login");
       } else {
-        toast.error(response.data.message || "Signup failed");
+        toast.error(response?.data?.message || "Signup failed");
       }
     } catch (error) {
       toast.error(
