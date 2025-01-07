@@ -1,10 +1,9 @@
 import React from "react";
 import { cn } from "../../utils/cn.js";
 
-const VideoCard = () => {
-  // aspect ratio used for images
+const PlaylistVideoCard = () => {
   return (
-    <div className={cn("flex flex-col w-full")}>
+    <div className={cn("flex flex-col w-full dark:bg-gray-800")}>
       <div className={cn("relative aspect-w-16 aspect-h-9")}>
         <img
           className={cn("object-cover w-full h-full")}
@@ -13,23 +12,21 @@ const VideoCard = () => {
         />
         <div
           className={cn(
-            "absolute bottom-1 right-1 rounded-lg p-1 bg-black text-white"
+            "absolute bottom-0 w-full h-20 bg-black border-t bg-white/30 p-4 text-white backdrop-blur-sm before:absolute before:inset-0 before:bg-black/40"
           )}
         >
-          17:16
+          <div class="relative z-[1]">
+            <p class="flex justify-between">
+              <span class="inline-block text-white">Playlist</span>
+              <span class="inline-block text-white">12&nbsp;videos</span>
+            </p>
+            <p class="text-sm text-white">100K Views&nbsp;·&nbsp;2 hours ago</p>
+          </div>
         </div>
       </div>
 
-      <div className={cn("flex p-4 bg-black text-white dark:bg-gray-800")}>
-        {/* Profile Picture */}
-        <div className={cn("flex-shrink-0")}>
-          <img
-            className={cn("object-cover w-12 h-12 rounded-full")}
-            src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="Creator"
-          />
-        </div>
-        <div className={cn("ml-4 flex flex-col justify-between w-full")}>
+      <div className={cn("flex p-2 bg-black text-white dark:bg-gray-800")}>
+        <div className={cn("flex flex-col justify-between w-full")}>
           <h2 className={cn("text-lg font-semibold")}>
             JavaScript Fundamentals: Variables and Data Types
           </h2>
@@ -45,4 +42,4 @@ const VideoCard = () => {
   );
 };
 
-export default VideoCard;
+export default PlaylistVideoCard;

@@ -3,6 +3,8 @@ import ChannelPage from "./ChannelPage";
 import VideoDetailPage from "./VideoDetailPage";
 import VideoListingGrid from "./VideoListingGrid";
 import VideoListingHorizontal from "./VideoListingHorizontal";
+import TermsAndConditionPage from "./TermsAndConditionPage";
+import PrivacyPolicyPage from "./PrivacyPolicyPage";
 // import LoginPage from "../pages/LoginPage";
 
 const AllRoutes = () => {
@@ -17,6 +19,11 @@ const AllRoutes = () => {
           path="/videoListingHorizontal"
           element={<VideoListingHorizontal />}
         />
+        <Route
+          path="/termsAndConditionPage"
+          element={<TermsAndConditionPage />}
+        />
+        <Route path="/privacyPolicyPage" element={<PrivacyPolicyPage />} />
         {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes>
     </div>

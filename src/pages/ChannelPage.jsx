@@ -2,10 +2,70 @@ import React from "react";
 import { cn } from "../utils/cn";
 import Subscribers from "../assets/svg/Subscribers";
 import Tabs from "../components/Tabs";
+import PlaylistVideoCard from "../components/VideoCard/PlaylistVideoCard";
+import VideoCard from "../components/VideoCard/VideoCard";
+import Tweets from "../components/Tweets";
+import Subscriber from "../components/Subscriber";
 const ChannelPage = () => {
+  const videoCards = new Array(10).fill(null);
+
+  const tabs = [
+    {
+      id: "tab-1",
+      label: "Videos",
+      content: (
+        <div className={cn(`grid grid-cols-4 gap-4 bg-black dark:bg-gray-800`)}>
+          {videoCards.map((_, index) => (
+            <div key={index} className="flex">
+              <VideoCard />
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      id: "tab-2",
+      label: "Playlist",
+      content: (
+        <div className={cn(`grid grid-cols-3 gap-4 bg-black dark:bg-gray-800`)}>
+          {videoCards.map((_, index) => (
+            <div key={index} className="flex">
+              <PlaylistVideoCard />
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      id: "tab-3",
+      label: "Tweets",
+      content: (
+        <div className={cn(`flex flex-col w-full bg-black dark:bg-gray-800`)}>
+          {videoCards.map((_, index) => (
+            <div key={index} className="flex w-full">
+              <Tweets />
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      id: "tab-4",
+      label: "Subscribed",
+      content: (
+        <div className={cn(`flex flex-col w-full bg-black dark:bg-gray-800`)}>
+          {videoCards.map((_, index) => (
+            <div key={index} className="flex w-full">
+              <Subscriber />
+            </div>
+          ))}
+        </div>
+      ),
+    },
+  ];
   return (
-    <div className="flex flex-col border border-red-500">
-      <div className="flex flex-col h-1/2 border border-red-500">
+    <div className="flex flex-col dark:bg-gray-800 ">
+      <div className="flex flex-col h-1/2 text-white dark:bg-gray-800">
         <div className={cn("relative w-full h-2/3 flex-shrink-0")}>
           <img
             className={cn("w-full h-52 object-cover")}
@@ -38,8 +98,8 @@ const ChannelPage = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col h-1/2">
-        <Tabs />
+      <div className="flex flex-col h-1/2 mt-2">
+        <Tabs tabs={tabs} />
       </div>
     </div>
   );
