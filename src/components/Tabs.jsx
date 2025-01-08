@@ -27,18 +27,14 @@ const Tabs = ({ tabs }) => {
 
   return (
     <section className="max-w-full" aria-multiselectable="false">
-      <ul
-        className="flex items-center border-b border-slate-200"
-        role="tablist"
-        ref={wrapperRef}
-      >
+      <ul className="flex items-center" role="tablist" ref={wrapperRef}>
         {tabs.map((tab, index) => (
           <li className="flex-1" role="presentation" key={tab.id}>
             <button
-              className={`-mb-px inline-flex h-12 w-full items-center justify-center gap-2 whitespace-nowrap border-b-2 px-6 text-sm font-medium tracking-wide transition duration-300 hover:bg-emerald-50 hover:stroke-emerald-600 focus:bg-emerald-50 focus-visible:outline-none disabled:cursor-not-allowed ${
+              className={`inline-flex h-10 w-full items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 text-sm font-medium tracking-wide transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 disabled:cursor-not-allowed ${
                 tabSelected === index
-                  ? "bg-white text-white border-emerald-500 stroke-emerald-500 dark:text-black"
-                  : "justify-self-center border-transparent stroke-slate-700 text-white hover:border-emerald-500 hover:text-emerald-500 focus:border-emerald-600 focus:stroke-emerald-600 focus:text-black"
+                  ? "bg-white text-gray-800 shadow-sm"
+                  : "text-white hover:bg-gray-200 hover:text-gray-800 focus:bg-gray-200"
               }`}
               role="tab"
               aria-selected={tabSelected === index ? "true" : "false"}

@@ -1,4 +1,5 @@
 import Layout from "./components/Layout";
+import AuthenticationPage from "./pages/AuthenticationPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import { useContext, useEffect, useState } from "react";
@@ -46,7 +47,9 @@ const App = () => {
         ) : isAuthenticated ? (
           <Layout />
         ) : (
-          <LoginPage />
+          <Layout />
+
+          //<AuthenticationPage />
         )}
       </div>
     </>

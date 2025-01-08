@@ -4,7 +4,6 @@ import { cn } from "../../utils/cn.js";
 const HorizontalVideoCard = () => {
   return (
     <>
-      {/* <div className={cn("flex h-1/8 flex-row w-full")}> */}
       <div className={cn("relative h-56 w-96 shrink-0")}>
         <img
           className={cn("h-full w-full")}
@@ -20,7 +19,7 @@ const HorizontalVideoCard = () => {
         </div>
       </div>
 
-      <div className={cn("flex w-2/3 flex-col p-4 bg-black text-white ")}>
+      <div className={cn("flex w-2/3 flex-col p-4 bg-gray-800 text-white ")}>
         <h2 className={cn("text-lg font-semibold")}>
           JavaScript Fundamentals: Variables and Data Types
         </h2>
@@ -44,7 +43,6 @@ const HorizontalVideoCard = () => {
           </h3>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 };

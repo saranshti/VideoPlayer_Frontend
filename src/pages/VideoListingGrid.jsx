@@ -7,7 +7,7 @@ const VideoListingGrid = () => {
   return (
     <div
       className={cn(
-        `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 bg-black`
+        `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 bg-gray-800`
       )}
     >
       {videoCards.map((_, index) => (
