@@ -53,7 +53,9 @@ const ChannelPage = () => {
       id: "tab-4",
       label: "Subscribed",
       content: (
-        <div className={cn(`flex flex-col w-full bg-black dark:bg-gray-800`)}>
+        <div
+          className={cn(`flex flex-col w-full gap-3 bg-black dark:bg-gray-800`)}
+        >
           {videoCards.map((_, index) => (
             <div key={index} className="flex w-full">
               <Subscriber />

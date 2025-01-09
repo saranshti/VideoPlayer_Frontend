@@ -5,6 +5,7 @@ import VideoListingGrid from "./VideoListingGrid";
 import VideoListingHorizontal from "./VideoListingHorizontal";
 import TermsAndConditionPage from "./TermsAndConditionPage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
+import ChannelPlaylistVideosPage from "./ChannelPlaylistVideosPage";
 // import LoginPage from "../pages/LoginPage";
 
 const AllRoutes = () => {
@@ -24,6 +25,10 @@ const AllRoutes = () => {
           element={<TermsAndConditionPage />}
         />
         <Route path="/privacyPolicyPage" element={<PrivacyPolicyPage />} />
+        <Route
+          path="/channelPlaylistVideosPage"
+          element={<ChannelPlaylistVideosPage />}
+        />
         {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes>
     </div>
