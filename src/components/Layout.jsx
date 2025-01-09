@@ -4,7 +4,7 @@ import AllRoutes from "../pages/AllRoutes";
 
 const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen max-w-screen flex flex-col">
+    <div className="min-h-screen min-w-screen flex flex-col">
       {/* Header */}
       <Header />
       {/* Main Content */}
@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
       </main>
 
       {/* Footer */}
-      <footer className="sticky w-screen bottom-0 bg-gray-800 text-white py-4 z-20 ">
+      <footer className="sticky w-full bottom-0 bg-gray-800 text-white py-4 z-20 ">
         <div className="container mx-auto text-center">
           <p>&copy; 2024 My React App. All rights reserved.</p>
         </div>
