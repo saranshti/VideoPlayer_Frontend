@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import { FaYoutube } from "react-icons/fa";
+import Logo from "../assets/svg/Logo.jsx";
 import { postData } from "../utils/apiConfig.js";
 import { AuthContext } from "../store/AuthContextProvider.jsx";
 import { toast } from "react-toastify";
@@ -63,7 +63,7 @@ const LoginPage = () => {
     <div className="bg-white rounded-lg shadow-xl overflow-hidden transform transition-all">
       <div className="p-8">
         <div className="flex justify-center mb-6">
-          <FaYoutube className="text-6xl text-red-600" />
+          <Logo className="w-10 h-10" />
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
           Welcome to YouTube
@@ -71,13 +71,13 @@ const LoginPage = () => {
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label
-              htmlFor="email"
+              htmlFor="loginEmail"
               className="text-sm font-medium text-gray-700 block mb-2"
             >
               Email
             </label>
             <input
-              id="email"
+              id="loginEmail"
               type="email"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
@@ -88,14 +88,14 @@ const LoginPage = () => {
           </div>
           <div>
             <label
-              htmlFor="password"
+              htmlFor="loginPassword"
               className="text-sm font-medium text-gray-700 block mb-2"
             >
               Password
             </label>
             <div className="relative">
               <input
-                id="password"
+                id="loginPassword"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

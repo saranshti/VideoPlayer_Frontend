@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
       {/* Header */}
       <Header />
       {/* Main Content */}
-      <main className="flex-1 bg-gray-50">
+      <main className="flex-1 p-4 bg-gray-800">
         {/* <div className="ml-60 pl-4">{children}</div> */}
         <div className="ml-64">
           <AllRoutes />

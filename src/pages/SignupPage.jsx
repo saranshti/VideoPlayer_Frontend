@@ -1,7 +1,6 @@
-"use client";
-
 import React, { useState, useContext } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import Logo from "../assets/svg/Logo.jsx";
 import { FaYoutube } from "react-icons/fa";
 import { AuthContext } from "../store/AuthContextProvider";
 import { toast } from "react-toastify";
@@ -78,7 +77,7 @@ const SignupPage = () => {
     <div className="bg-white rounded-lg shadow-xl overflow-hidden transform transition-all">
       <div className="p-8">
         <div className="flex justify-center mb-6">
-          <FaYoutube className="text-6xl text-red-600" />
+          <Logo className="w-10 h-10" />
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
           Sign up for YouTube

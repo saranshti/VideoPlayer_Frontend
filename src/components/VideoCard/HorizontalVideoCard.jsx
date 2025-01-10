@@ -7,7 +7,7 @@ const HorizontalVideoCard = () => {
       <div className={cn("relative h-56 w-96 shrink-0")}>
         <img
           className={cn("h-full w-full")}
-          src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={video?.thumbnail}
           alt="image"
         />
         <div
@@ -15,16 +15,14 @@ const HorizontalVideoCard = () => {
             "absolute bottom-1 right-1 rounded-lg p-1 bg-black text-white"
           )}
         >
-          17:16
+          {video?.duration}
         </div>
       </div>
 
       <div className={cn("flex w-2/3 flex-col p-4 bg-gray-800 text-white ")}>
-        <h2 className={cn("text-lg font-semibold")}>
-          JavaScript Fundamentals: Variables and Data Types
-        </h2>
+        <h2 className={cn("text-lg font-semibold")}>{video?.title}</h2>
         <div className={cn("flex items-center text-sm")}>
-          <span>10.3k Views</span>
+          <span>{video?.views} Views</span>
           <span>·</span>
           <span>44 minutes ago</span>
         </div>

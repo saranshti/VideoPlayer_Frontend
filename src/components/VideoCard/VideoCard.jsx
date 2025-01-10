@@ -1,14 +1,14 @@
 import React from "react";
 import { cn } from "../../utils/cn.js";
 
-const VideoCard = () => {
+const VideoCard = ({ video }) => {
   // aspect ratio used for images
   return (
     <div className={cn("flex flex-col w-full")}>
       <div className={cn("relative aspect-w-16 aspect-h-9")}>
         <img
           className={cn("object-cover w-full h-full")}
-          src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={video?.thumbnail}
           alt="image"
         />
         <div
@@ -16,7 +16,7 @@ const VideoCard = () => {
             "absolute bottom-1 right-1 rounded-lg p-1 bg-black text-white"
           )}
         >
-          17:16
+          {video?.duration}
         </div>
       </div>
 
@@ -30,11 +30,9 @@ const VideoCard = () => {
           />
         </div>
         <div className={cn("ml-4 flex flex-col justify-between w-full")}>
-          <h2 className={cn("text-lg font-semibold")}>
-            JavaScript Fundamentals: Variables and Data Types
-          </h2>
+          <h2 className={cn("text-lg font-semibold")}>{video?.title}</h2>
           <div className={cn("flex items-center text-sm")}>
-            <span className={cn("mr-2")}>10.3k Views</span>
+            <span className={cn("mr-2")}>{video?.views} Views</span>
             <span>·</span>
             <span className={cn("ml-2")}>44 minutes ago</span>
           </div>

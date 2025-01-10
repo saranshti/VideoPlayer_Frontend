@@ -47,9 +47,7 @@ const App = () => {
         ) : isAuthenticated ? (
           <Layout />
         ) : (
-          <Layout />
-
-          //<AuthenticationPage />
+          <AuthenticationPage />
         )}
       </div>
     </>
