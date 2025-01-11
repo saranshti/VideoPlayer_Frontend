@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HorizontalVideoCard from "../components/VideoCard/HorizontalVideoCard";
+import HorizontalVideoCard from "./VideoCard/HorizontalVideoCard";
 import { cn } from "../utils/cn";
 import { getData } from "../utils/apiConfig";
 import Loader from "../assets/svg/Loader";
@@ -38,8 +38,8 @@ const VideoListingHorizontal = () => {
   }
   return (
     <div className={cn(`flex flex-col gap-4 bg-gray-800`)}>
-      {videoData.map((video) => (
-        <div key={video?._id} className={cn("flex flex-row w-full")}>
+      {videoData?.map((video) => (
+        <div key={video?._id} className="flex">
           <HorizontalVideoCard video={video} />
         </div>
       ))}

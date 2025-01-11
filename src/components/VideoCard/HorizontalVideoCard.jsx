@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "../../utils/cn.js";
 
-const HorizontalVideoCard = () => {
+const HorizontalVideoCard = ({ video }) => {
   return (
     <>
       <div className={cn("relative h-56 w-96 shrink-0")}>
