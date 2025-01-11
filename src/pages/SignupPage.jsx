@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import Logo from "../assets/svg/Logo.jsx";
-import { FaYoutube } from "react-icons/fa";
 import { AuthContext } from "../store/AuthContextProvider";
 import { toast } from "react-toastify";
 import Loader from "../assets/svg/Loader.jsx";

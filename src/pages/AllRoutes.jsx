@@ -6,27 +6,26 @@ import VideoListingHorizontal from "./VideoListingHorizontal";
 import TermsAndConditionPage from "./TermsAndConditionPage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
 import ChannelPlaylistVideosPage from "./ChannelPlaylistVideosPage";
-// import LoginPage from "../pages/LoginPage";
 
 const AllRoutes = () => {
   return (
     <div className="w-full">
       <Routes>
         <Route path="/" element={<VideoListingGrid />} />
-        <Route path="/channelPage" element={<ChannelPage />} />
-        <Route path="/videoDetailPage" element={<VideoDetailPage />} />
-        <Route path="/videoListingGrid" element={<VideoListingGrid />} />
+        <Route path="/channel" element={<ChannelPage />} />
+        <Route path="/video-detail" element={<VideoDetailPage />} />
+        <Route path="/video-listing-grid" element={<VideoListingGrid />} />
         <Route
-          path="/videoListingHorizontal"
+          path="/video-listing-horizontal"
           element={<VideoListingHorizontal />}
         />
         <Route
-          path="/termsAndConditionPage"
+          path="/terms-and-condition"
           element={<TermsAndConditionPage />}
         />
-        <Route path="/privacyPolicyPage" element={<PrivacyPolicyPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route
-          path="/channelPlaylistVideosPage"
+          path="/channel-playlist-videos"
           element={<ChannelPlaylistVideosPage />}
         />
         {/* <Route path="*" element={<PageNotFound />} /> */}

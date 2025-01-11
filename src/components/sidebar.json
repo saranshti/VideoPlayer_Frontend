@@ -1,0 +1,8 @@
+[
+    {"href":"/", "label":"Home", "icon":"Home"},
+    {"href":"/liked-video", "label":"Liked Video", "icon":"LikedVideo"},
+    {"href":"/history", "label":"History", "icon":"History" },
+    {"href":"/my-videos", "label":"My Videos", "icon":"MyVideos", "badge":"100"},
+    {"href":"/my-playlists", "label":"My Playlists", "icon":"Playlist", "badge" : "100"},
+    {"href":"/subscribers", "label":"Subscribers", "icon":"Subscribers", "badge": "100"}
+]
