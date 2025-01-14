@@ -1,5 +1,10 @@
 import { Route, Routes } from "react-router-dom";
+
+import Home from "./Home";
 import LikedVideo from "./LikedVideo";
+import History from "./History";
+import MyVideos from "./MyVideos";
+import Subscriber from "./Subscriber";
 import ChannelPage from "./ChannelPage";
 import VideoDetailPage from "./VideoDetailPage";
 import Home from "./Home";
@@ -13,6 +18,9 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/liked-video" element={<LikedVideo />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/my-videos" element={<MyVideos />} />
+        <Route path="/subscribers" element={<Subscriber />} />
         <Route path="/channel" element={<ChannelPage />} />
         <Route path="/video-detail" element={<VideoDetailPage />} />
         {/* <Route path="/video-listing-grid" element={<VideoListingGrid />} /> */}
