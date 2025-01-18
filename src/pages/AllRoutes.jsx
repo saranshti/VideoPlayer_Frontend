@@ -7,9 +7,9 @@ import MyVideos from "./MyVideos";
 import Subscriber from "./Subscriber";
 import ChannelPage from "./ChannelPage";
 import VideoDetailPage from "./VideoDetailPage";
-import Home from "./Home";
 import TermsAndConditionPage from "./TermsAndConditionPage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
+import VideoUpload from "./VideoUpload";
 import ChannelPlaylistVideosPage from "./ChannelPlaylistVideosPage";
 
 const AllRoutes = () => {
@@ -23,6 +23,7 @@ const AllRoutes = () => {
         <Route path="/subscribers" element={<Subscriber />} />
         <Route path="/channel" element={<ChannelPage />} />
         <Route path="/video-detail" element={<VideoDetailPage />} />
+        <Route path="/video-upload" element={<VideoUpload />} />
         {/* <Route path="/video-listing-grid" element={<VideoListingGrid />} /> */}
         {/* <Route
           path="/video-listing-horizontal"

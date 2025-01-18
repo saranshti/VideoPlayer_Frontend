@@ -1,86 +1,85 @@
-import { useState } from "react"
+import { useState } from "react";
 
 import {
   generateVideoThumbnails,
-  importFileandPreview
-} from "./video-thumbnails-generator"
+  importFileandPreview,
+} from "../utils/video-thumbnails-generator";
 
-const useVideoThumbnailForm = props => {
-  const { maxThumbnails, type } = props
+const useVideoThumbnailForm = (props) => {
+  const { maxThumbnails, type } = props;
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState("")
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState("");
 
-  const [inputUrl, setInputUrl] = useState("")
-  const [inputFile, setInputFile] = useState(null)
+  const [inputUrl, setInputUrl] = useState("");
+  const [inputFile, setInputFile] = useState(null);
 
-  const [numberOfThumbnails, setNumberOfThumbnails] = useState(0)
-  const [thumbnails, setThumbnails] = useState()
-  const [loadAssync, setLoadAssync] = useState(false)
-  const [selectedThumbnail, setSelectedThumbnail] = useState()
+  const [numberOfThumbnails, setNumberOfThumbnails] = useState(0);
+  const [thumbnails, setThumbnails] = useState();
+  const [loadAssync, setLoadAssync] = useState(false);
+  const [selectedThumbnail, setSelectedThumbnail] = useState();
 
   const clearForm = () => {
-    setNumberOfThumbnails(0)
-    setSelectedThumbnail("")
-    setInputFile(null)
-    setInputUrl("")
-    setIsError("")
-  }
+    setNumberOfThumbnails(0);
+    setSelectedThumbnail("");
+    setInputFile(null);
+    setInputUrl("");
+    setIsError("");
+  };
 
-  const handleInputUrlChange = event => {
-    clearForm()
-    setInputUrl(event.target.value)
-  }
-
-  const handleInputFileChange = event => {
-    const selectedFile = event.target?.files?.[0]
+  const handleInputFileChange = (event) => {
+    const selectedFile = event.target?.files?.[0];
     if (selectedFile?.type.includes("video")) {
-      clearForm()
+      clearForm();
 
-      importFileandPreview(selectedFile).then(url => {
-        setInputFile(selectedFile)
-        setInputUrl(url)
-      })
+      importFileandPreview(selectedFile).then((url) => {
+        setInputFile(selectedFile);
+        setInputUrl(url);
+      });
     }
-  }
+  };
 
-  const handleNumberOfThumbnails = e => {
-    const newValue = parseInt(e.target.value)
-    setNumberOfThumbnails(newValue > maxThumbnails ? maxThumbnails : newValue)
-  }
+  const handleNumberOfThumbnails = (e) => {
+    // const newValue = parseInt(e.target.value)
+    const newValue = parseInt(e);
+    setNumberOfThumbnails(newValue > maxThumbnails ? maxThumbnails : newValue);
+  };
 
-  const handleLoadAssync = e => {
-    setLoadAssync(e.target.checked)
-  }
+  const handleLoadAssync = (e) => {
+    setLoadAssync(e.target.checked);
+  };
 
   const updateThumbnails = (url, index) => {
-    setThumbnails(prev => {
-      const newThumbnails = [...prev]
-      newThumbnails[index] = url
-      return newThumbnails
-    })
-  }
+    setThumbnails((prev) => {
+      const newThumbnails = [...prev];
+      newThumbnails[index] = url;
+      return newThumbnails;
+    });
+  };
 
   const handleGenerateThumbnails = async () => {
-    const input = type === "url" ? inputUrl : inputFile
+    // const input = type === "url" ? inputUrl : inputFile;
+    const input = inputFile;
 
-    const callback = loadAssync ? updateThumbnails : undefined
-    setThumbnails(loadAssync ? Array(numberOfThumbnails).fill("") : [""])
+    const type = "file";
 
-    setIsError("")
-    setIsLoading(true)
+    const callback = loadAssync ? updateThumbnails : undefined;
+    setThumbnails(loadAssync ? Array(numberOfThumbnails).fill("") : [""]);
+
+    setIsError("");
+    setIsLoading(true);
 
     generateVideoThumbnails(input, numberOfThumbnails, type, callback)
-      .then(res => {
-        setThumbnails(res)
+      .then((res) => {
+        setThumbnails(res);
       })
-      .catch(err => {
-        setIsError(err)
+      .catch((err) => {
+        setIsError(err);
       })
       .finally(() => {
-        setIsLoading(false)
-      })
-  }
+        setIsLoading(false);
+      });
+  };
 
   return {
     handleGenerateThumbnails,
@@ -96,9 +95,8 @@ const useVideoThumbnailForm = props => {
     setIsError,
     setSelectedThumbnail,
     thumbnails,
-    handleInputUrlChange,
-    handleInputFileChange
-  }
-}
+    handleInputFileChange,
+  };
+};
 
-export default useVideoThumbnailForm
+export default useVideoThumbnailForm;
