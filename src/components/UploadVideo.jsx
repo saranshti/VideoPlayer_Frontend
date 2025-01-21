@@ -34,11 +34,14 @@ const UploadVideo = () => {
       return;
     }
     handleOpenModal();
+    const date = Date.now();
+    console.log("first");
     const durationTime = await getVideoDurationFromVideoFile(file);
     const duration = convertSecondToMinuteandHour(durationTime);
     const chunkSize = 10 * 1024 * 1024; // 10MB per chunk
     const totalChunks = Math.ceil(file.size / chunkSize);
-    const originalFileName = file.name;
+    const originalFileName = date + file.name;
+    console.log("originalFileName", originalFileName);
 
     setUploading(true);
     setProgress(0);
