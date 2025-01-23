@@ -1,20 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import LikedVideo from "../assets/svg/LikedVideo";
 import DisLike from "../assets/svg/DisLike";
 import Check from "../assets/svg/Check";
 import Subscribers from "../assets/svg/Subscribers";
 import VideoSave from "../assets/svg/VideoSave";
 import VideoDetailVideoCard from "../components/VideoCard/VideoDetailVideoCard";
+import { useParams } from "react-router-dom";
+import { getData } from "../utils/apiConfig";
+import { toast } from "react-toastify";
 
 const VideoDetailPage = () => {
+  const params = useParams();
+  const videoId = params?.id;
+  const Server_Api_Url = import.meta.env.VITE_APP_SERVER_API;
+
+  const [videoData, setVideoData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const getVideoData = async (id) => {
+    setLoading(true);
+    const response = await getData(`video/video-get/${id}`);
+    if (
+      response?.data?.success &&
+      (response?.status === 200 || response?.status === 201)
+    ) {
+      setVideoData(response?.data?.data);
+      console.log("first", response?.data?.data);
+    } else {
+      setVideoData([]);
+      toast.error(response?.message);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getVideoData(videoId);
+  }, [videoId]);
   return (
     <div className="flex flex-row bg-gray-800 w-full gap-2">
       <div className="col-span-12 w-full">
         <div className="relative mb-4 w-full pt-[56%]">
           <div className="absolute inset-0">
-            <video className="h-full w-full" controls="" autoPlay="" muted="">
+            <video
+              id="videoPlayer"
+              className="h-full w-full"
+              controls
+              muted="muted"
+              autoPlay
+            >
               <source
-                src="https://res.cloudinary.com/dfw5nnic5/video/upload/v1695117968/Sample_1280x720_mp4_b4db0s.mp4"
+                src={`${Server_Api_Url}/video/video-stream/${videoId}`}
                 type="video/mp4"
               />
             </video>
@@ -28,7 +63,7 @@ const VideoDetailPage = () => {
           <div className="flex flex-wrap gap-y-2">
             <div className="w-full md:w-1/2 lg:w-full xl:w-1/2">
               <h1 className="text-lg font-bold text-white">
-                Advanced React Patterns
+                {videoData?.[0]?.title}
               </h1>
               <p className="flex text-sm text-gray-200">
                 30,164&nbsp;Views ·18 hours ago
@@ -186,13 +221,15 @@ const VideoDetailPage = () => {
             <div className="flex items-center gap-x-4">
               <div className="mt-2 h-12 w-12 shrink-0">
                 <img
-                  src="https://images.pexels.com/photos/18264716/pexels-photo-18264716/free-photo-of-man-people-laptop-internet.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt="reactpatterns"
+                  src={videoData?.[0]?.owner?.avtar}
+                  alt={videoData?.[0]?.owner?.fullName}
                   className="h-full w-full rounded-full"
                 />
               </div>
               <div className="block">
-                <p className="text-gray-200">React Patterns</p>
+                <p className="text-gray-200">
+                  {videoData?.[0]?.owner?.fullName}
+                </p>
                 <p className="text-sm text-gray-400">757K Subscribers</p>
               </div>
             </div>
@@ -205,12 +242,7 @@ const VideoDetailPage = () => {
           </div>
           <hr className="my-4 border-white" />
           <div className="h-5 overflow-hidden group-focus:h-auto">
-            <p className="text-sm text-white">
-              🚀 Dive into the world of React with our latest tutorial series:
-              "Advanced React Patterns"! 🛠️ Whether you're a seasoned developer
-              or just starting out, this series is designed to elevate your
-              React skills to the next level.
-            </p>
+            <p className="text-sm text-white">{videoData?.[0]?.description}</p>
           </div>
         </div>
         <button className="peer w-full rounded-lg border p-4 text-left text-white duration-200 hover:bg-white/5 focus:bg-white/5 sm:hidden">

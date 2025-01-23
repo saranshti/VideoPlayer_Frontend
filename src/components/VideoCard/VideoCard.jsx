@@ -1,10 +1,15 @@
 import React from "react";
 import { cn } from "../../utils/cn.js";
+import { useNavigate } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
   // aspect ratio used for images
+  const navigate = useNavigate();
+  const handlePlayVideo = () => {
+    navigate(`/video-detail/${video._id}`);
+  };
   return (
-    <div className={cn("flex flex-col w-full")}>
+    <div className={cn("flex flex-col w-full")} onClick={handlePlayVideo}>
       <div className={cn("relative aspect-w-16 aspect-h-9")}>
         <img
           className={cn("object-cover w-full h-full")}

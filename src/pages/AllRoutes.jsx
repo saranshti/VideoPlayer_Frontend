@@ -22,7 +22,7 @@ const AllRoutes = () => {
         <Route path="/my-videos" element={<MyVideos />} />
         <Route path="/subscribers" element={<Subscriber />} />
         <Route path="/channel" element={<ChannelPage />} />
-        <Route path="/video-detail" element={<VideoDetailPage />} />
+        <Route path="/video-detail/:id" element={<VideoDetailPage />} />
         <Route path="/video-upload" element={<VideoUpload />} />
         {/* <Route path="/video-listing-grid" element={<VideoListingGrid />} /> */}
         {/* <Route
