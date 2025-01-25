@@ -1,21 +1,39 @@
 import React, { useState, useEffect } from "react";
-import LikedVideo from "../assets/svg/LikedVideo";
-import DisLike from "../assets/svg/DisLike";
+import LikeDisLike from "../components/LikeDisLike.jsx";
 import Check from "../assets/svg/Check";
 import Subscribers from "../assets/svg/Subscribers";
 import VideoSave from "../assets/svg/VideoSave";
 import VideoDetailVideoCard from "../components/VideoCard/VideoDetailVideoCard";
+import { getTimeDifference } from "../utils/utilsFunction.js";
 import { useParams } from "react-router-dom";
-import { getData } from "../utils/apiConfig";
+import { getData, patchData } from "../utils/apiConfig";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 const VideoDetailPage = () => {
   const params = useParams();
   const videoId = params?.id;
+  const location = useLocation();
   const Server_Api_Url = import.meta.env.VITE_APP_SERVER_API;
-
   const [videoData, setVideoData] = useState(null);
+  const [allVideoData, setAllVideoData] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const getAllVideo = async () => {
+    setLoading(true);
+    const response = await getData(`video/video-get`);
+
+    if (
+      response?.data?.success &&
+      (response?.status === 200 || response?.status === 201)
+    ) {
+      setAllVideoData(response?.data?.data);
+    } else {
+      setAllVideoData([]);
+      toast.error(response?.message);
+    }
+    setLoading(false);
+  };
 
   const getVideoData = async (id) => {
     setLoading(true);
@@ -25,7 +43,6 @@ const VideoDetailPage = () => {
       (response?.status === 200 || response?.status === 201)
     ) {
       setVideoData(response?.data?.data);
-      console.log("first", response?.data?.data);
     } else {
       setVideoData([]);
       toast.error(response?.message);
@@ -33,9 +50,37 @@ const VideoDetailPage = () => {
     setLoading(false);
   };
 
+  const addViews = async (id) => {
+    setLoading(true);
+    const response = await patchData(`video/video-view/${id}`);
+    if (
+      response?.data?.success &&
+      (response?.status === 200 || response?.status === 201)
+    ) {
+    } else {
+      toast.error(response?.message);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getAllVideo();
+  }, []);
+
   useEffect(() => {
     getVideoData(videoId);
   }, [videoId]);
+
+  useEffect(() => {
+    const id = setTimeout(async () => {
+      await addViews(videoId);
+    }, 20000);
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, [location]);
+
   return (
     <div className="flex flex-row bg-gray-800 w-full gap-2">
       <div className="col-span-12 w-full">
@@ -63,30 +108,16 @@ const VideoDetailPage = () => {
           <div className="flex flex-wrap gap-y-2">
             <div className="w-full md:w-1/2 lg:w-full xl:w-1/2">
               <h1 className="text-lg font-bold text-white">
-                {videoData?.[0]?.title}
+                {videoData?.title}
               </h1>
               <p className="flex text-sm text-gray-200">
-                30,164&nbsp;Views ·18 hours ago
+                {videoData?.views}&nbsp;Views ·
+                {getTimeDifference(videoData?.createdAt)} ago
               </p>
             </div>
             <div className="w-full md:w-1/2 lg:w-full xl:w-1/2">
               <div className="flex items-center justify-between gap-x-4 md:justify-end lg:justify-between xl:justify-end">
-                <div className="flex overflow-hidden rounded-lg border">
-                  <button
-                    className="group/btn flex items-center text-white gap-x-2 border-r border-gray-700 px-4 py-1.5 after:content-[attr(data-like)] hover:bg-white/10 focus:after:content-[attr(data-like-alt)]"
-                    data-like={3050}
-                    data-like-alt={3051}
-                  >
-                    <LikedVideo className="h-4 w-4" />
-                  </button>
-                  <button
-                    className="group/btn flex items-center text-white gap-x-2 px-4 py-1.5 after:content-[attr(data-like)] hover:bg-white/10 focus:after:content-[attr(data-like-alt)]"
-                    data-like={20}
-                    data-like-alt={21}
-                  >
-                    <DisLike className="h-4 w-4" />
-                  </button>
-                </div>
+                <LikeDisLike />
                 <div className="relative block">
                   <button className="peer flex items-center gap-x-2 rounded-lg bg-white px-4 py-1.5 text-black">
                     <span className="inline-block w-5">
@@ -221,15 +252,13 @@ const VideoDetailPage = () => {
             <div className="flex items-center gap-x-4">
               <div className="mt-2 h-12 w-12 shrink-0">
                 <img
-                  src={videoData?.[0]?.owner?.avtar}
-                  alt={videoData?.[0]?.owner?.fullName}
+                  src={videoData?.owner?.avtar}
+                  alt={videoData?.owner?.fullName}
                   className="h-full w-full rounded-full"
                 />
               </div>
               <div className="block">
-                <p className="text-gray-200">
-                  {videoData?.[0]?.owner?.fullName}
-                </p>
+                <p className="text-gray-200">{videoData?.owner?.fullName}</p>
                 <p className="text-sm text-gray-400">757K Subscribers</p>
               </div>
             </div>
@@ -242,7 +271,7 @@ const VideoDetailPage = () => {
           </div>
           <hr className="my-4 border-white" />
           <div className="h-5 overflow-hidden group-focus:h-auto">
-            <p className="text-sm text-white">{videoData?.[0]?.description}</p>
+            <p className="text-sm text-white">{videoData?.description}</p>
           </div>
         </div>
         <button className="peer w-full rounded-lg border p-4 text-left text-white duration-200 hover:bg-white/5 focus:bg-white/5 sm:hidden">
@@ -452,21 +481,11 @@ const VideoDetailPage = () => {
       </div>
 
       <div className="flex flex-col gap-3 w-1/3 shrink-0">
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
-        <VideoDetailVideoCard />
+        {allVideoData?.map((video) => (
+          <div key={video?._id} className="flex">
+            <VideoDetailVideoCard video={video} />
+          </div>
+        ))}
       </div>
     </div>
   );

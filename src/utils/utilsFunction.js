@@ -46,3 +46,53 @@ export const convertSecondToMinuteandHour = (second) => {
   // Remove the hour part if hours are 0
   return formattedTime.replace(/^00:/, "").replace(/:$/, "");
 };
+
+export function getTimeDifference(utcTime) {
+  const now = new Date();
+  const inputDate = new Date(utcTime);
+
+  const diffInMilliseconds = now - inputDate;
+
+  const diffInSeconds = diffInMilliseconds / 1000;
+  const diffInMinutes = diffInSeconds / 60;
+  const diffInHours = diffInMinutes / 60;
+  const diffInDays = diffInHours / 24;
+  const diffInMonths = diffInDays / 30; // approximate month length
+  const diffInYears = diffInDays / 365; // approximate year length
+
+  if (diffInYears >= 1) {
+    return (
+      Math.floor(diffInYears) +
+      " year" +
+      (Math.floor(diffInYears) > 1 ? "s" : "")
+    );
+  } else if (diffInMonths >= 1) {
+    return (
+      Math.floor(diffInMonths) +
+      " month" +
+      (Math.floor(diffInMonths) > 1 ? "s" : "")
+    );
+  } else if (diffInDays >= 1) {
+    return (
+      Math.floor(diffInDays) + " day" + (Math.floor(diffInDays) > 1 ? "s" : "")
+    );
+  } else if (diffInHours >= 1) {
+    return (
+      Math.floor(diffInHours) +
+      " hour" +
+      (Math.floor(diffInHours) > 1 ? "s" : "")
+    );
+  } else if (diffInMinutes >= 1) {
+    return (
+      Math.floor(diffInMinutes) +
+      " minute" +
+      (Math.floor(diffInMinutes) > 1 ? "s" : "")
+    );
+  } else {
+    return (
+      Math.floor(diffInSeconds) +
+      " second" +
+      (Math.floor(diffInSeconds) > 1 ? "s" : "")
+    );
+  }
+}

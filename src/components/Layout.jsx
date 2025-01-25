@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
       {/* Footer */}
       <footer className="sticky w-full bottom-0 bg-gray-800 text-white border-t border-white py-4 z-20 ">
         <div className="container mx-auto text-center">
-          <p>&copy; 2024 My React App. All rights reserved.</p>
+          <p>&copy; 2025 My React App. All rights reserved.</p>
         </div>
       </footer>
     </div>
